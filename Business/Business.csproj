@@ -41,9 +41,25 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
-    <Compile Include="Entities\EndPoint.cs" />
+    <Compile Include="Controllers\CheckEndpoint.cs" />
+    <Compile Include="Controllers\CreateEndpointBusiness.cs" />
+    <Compile Include="Controllers\DeleteEndpointBusiness.cs" />
+    <Compile Include="Interfaces\IUpdateEndpointBusiness.cs" />
+    <Compile Include="Controllers\UpdateEndpointBusiness.cs" />
+    <Compile Include="Interfaces\IDeleteEndpointBusiness.cs" />
+    <Compile Include="Interfaces\IIndexEndpointBusiness.cs" />
+    <Compile Include="Controllers\IndexEndpointBusiness.cs" />
+    <Compile Include="Interfaces\IReadEndpointBusiness.cs" />
+    <Compile Include="Controllers\ReadEndpointBusiness.cs" />
+    <Compile Include="Helpers\ModelIdEnum.cs" />
+    <Compile Include="Helpers\SwitchStateEnum.cs" />
+    <Compile Include="Interfaces\ICreateEndpointBusiness.cs" />
+    <Compile Include="Interfaces\ICheckEndpoint.cs" />
+    <Compile Include="Entities\Endpoint.cs" />
+    <Compile Include="Helpers\EndpointsInExecution.cs" />
+    <Compile Include="Helpers\SystemName.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

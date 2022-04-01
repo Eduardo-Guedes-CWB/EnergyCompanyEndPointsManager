@@ -1,19 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Business.Helpers;
+using System;
+using UI.Interfaces;
 
 namespace UI.Controllers
 {
-    public class StartProcess
-    {
-        protected StartProcess()
-        { 
-        }
-        public static void UserInteraction()
+    public class InitialOptions : IInitialOptions
+    {        
+        public int UserInteraction()
         {
-            Console.WriteLine("Options");
+            Console.Clear();
+            Console.WriteLine(SystemName.Name.ToUpper());
+            Console.WriteLine();
+            Console.WriteLine("HOME");
+            Console.WriteLine("You can choose an option described below:");
             Console.WriteLine();
             Console.WriteLine("To insert a new endpoint, press 1");
             Console.WriteLine("To edit an existing endpoint, press 2");
@@ -22,25 +21,19 @@ namespace UI.Controllers
             Console.WriteLine("To find an endpoint by \"Endpoint Serial Number\", press 5");
             Console.WriteLine("To exit, press 6");
             int optionSelected;
+            Console.WriteLine();
+            Console.Write("Enter number option here: ");
             int.TryParse(Console.ReadLine(), out optionSelected);
-            
+
             while (optionSelected < 1 || optionSelected > 6)
             {
                 Console.WriteLine();
                 Console.WriteLine("Invalid option, please insert one of the options listed above");
+                Console.Write("Enter number option here: ");
                 int.TryParse(Console.ReadLine(), out optionSelected);
             }
 
-            switch (optionSelected)
-            {
-                case 1:
-                    CreateEndPoint.UserInteraction();
-                    break;
-                default:
-                    break;
-            }
-
-            Console.ReadKey();
+            return optionSelected;            
         }
     }
 }

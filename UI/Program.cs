@@ -1,19 +1,40 @@
-﻿using Business.Entities;
+﻿using Business.Controllers;
+using Business.Interfaces;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using UI.Controllers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using UI.Interfaces;
 
 namespace UI
 {
-    internal class Program
+    internal static class Program
     {
-        public static List<EndPoint> EndPoints = new List<EndPoint>();
         static void Main(string[] args)
-        {            
-            StartProcess.UserInteraction();
+        {
+            var host = CreateHostBuilder(args).Build();
+            host.Services.GetRequiredService<IOrchestratorApplication>().Initialize();
+        }        
+        private static IHostBuilder CreateHostBuilder(string[] args)
+        {
+            return Host.CreateDefaultBuilder(args)
+                .ConfigureServices(services =>
+                {
+                    services.AddScoped<IOrchestratorApplication,OrchestratorApplication>();
+                    services.AddScoped<IInitialOptions,InitialOptions>();
+                    services.AddScoped<ICreateEndpoint,CreateEndpoint>();
+                    services.AddScoped<ICreateEndpointBusiness,CreateEndpointBusiness>();
+                    services.AddScoped<ICheckEndpoint,CheckEndpoint>();
+                    services.AddScoped<IActionConfirmation,ActionConfirmation>();
+                    services.AddScoped<IReadEndpoint,ReadEndpoint>();
+                    services.AddScoped<IReadEndpointBusiness,ReadEndpointBusiness>();
+                    services.AddScoped<IReadEndpointBusiness,ReadEndpointBusiness>();
+                    services.AddScoped<IIndexEndpoint,IndexEndpoint>();
+                    services.AddScoped<IIndexEndpointBusiness,IndexEndpointBusiness>();
+                    services.AddScoped<IDeleteEndpoint, DeleteEndpoint>();
+                    services.AddScoped<IDeleteEndpointBusiness, DeleteEndpointBusiness>();
+                    services.AddScoped<IUpdateEndpoint, UpdateEndpoint>();
+                    services.AddScoped<IUpdateEndpointBusiness, UpdateEndpointBusiness>();
+                });
         }
     }
 }
