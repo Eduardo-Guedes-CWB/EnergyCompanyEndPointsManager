@@ -37,20 +37,20 @@ namespace UI.Controllers
                 serialNumber = Console.ReadLine();
             }
             Console.WriteLine();
-            Endpoint endpoint = _readEndpointBusiness.Read(serialNumber);
-            if (endpoint == null)
+            var result = _readEndpointBusiness.Read(serialNumber);
+            if (result.Item3 == null)
             {
-                return "There is no endpoint created for this serial number";
+                return result.Item2;
             }
             else
             {
                 Console.WriteLine("Below the endpoint data:");
                 Console.WriteLine();
-                Console.WriteLine($"Serial Number: {endpoint.EndpointSerialNumber};");
-                Console.WriteLine($"Meter Model Id: {endpoint.MeterModelId} ({(ModelIdEnum.ModelId)endpoint.MeterModelId});");
-                Console.WriteLine($"Meter Number: {endpoint.MeterNumber};");
-                Console.WriteLine($"Meter Firmware Version: {endpoint.MeterFirmwareVersion};");
-                Console.WriteLine($"Switch State: {endpoint.SwitchState} ({(SwitchStateEnum.SwitchState)endpoint.SwitchState}).");
+                Console.WriteLine($"Serial Number: {result.Item3.EndpointSerialNumber};");
+                Console.WriteLine($"Meter Model Id: {result.Item3.MeterModelId} ({(ModelIdEnum.ModelId)result.Item3.MeterModelId});");
+                Console.WriteLine($"Meter Number: {result.Item3.MeterNumber};");
+                Console.WriteLine($"Meter Firmware Version: {result.Item3.MeterFirmwareVersion};");
+                Console.WriteLine($"Switch State: {result.Item3.SwitchState} ({(SwitchStateEnum.SwitchState)result.Item3.SwitchState}).");
                 Console.WriteLine();
                 Console.WriteLine("You can alter just the switch state");
                 Console.WriteLine("For Disconnected, enter 0");
@@ -66,11 +66,11 @@ namespace UI.Controllers
                     Console.Write("Enter switch state here: ");
                     switchStateOk = int.TryParse(Console.ReadLine(), out switchState);
                 }
-                endpoint.SwitchState = switchState;
+                result.Item3.SwitchState = switchState;
                 Console.WriteLine("Do you want to alter the switch state of this endpoint? (Y / N)");
                 if (_actionConfirmation.GetConfirmation())
                 {
-                    return _updateEndpointBusiness.Update(endpoint).Item2;
+                    return _updateEndpointBusiness.Update(result.Item3).Item2;
                 }
                 else
                     return "Operation aborted";

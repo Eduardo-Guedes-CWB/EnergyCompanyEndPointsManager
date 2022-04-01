@@ -5,6 +5,6 @@ namespace Business.Interfaces
 {
     public interface ICreateEndpointBusiness
     {
-        Tuple<bool, string> Create(Endpoint endPoint);
+        Tuple<bool, string> Create(Endpoint endpoint);
     }
 }

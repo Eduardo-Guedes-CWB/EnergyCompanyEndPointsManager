@@ -1,9 +1,10 @@
 ﻿using Business.Entities;
+using System;
 
 namespace Business.Interfaces
 {
     public interface IReadEndpointBusiness
     {
-        Endpoint Read(string serialNumber);
+        Tuple<bool, string, Endpoint> Read(string serialNumber);
     }
 }
